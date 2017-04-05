@@ -1,0 +1,24 @@
+{
+  "name": "cordova-plugin-chrome-webview-checker",
+  "version": "0.9.0",
+  "description": "Checks whether Android System Webview is installed and enabled or not on Cordova.",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "scripts": {
+    "testing:setup": "cordova create playground org.cpcwc.playground Playground && cd ./playground && cordova platform add android",
+    "testing:reset": "cd ./playground && cordova plugin rm cordova-plugin-chrome-webview-checker; cordova plugin add ..",
+    "testing:start": "cd ./playground && cordova run android"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoNameProvided/cordova-plugin-chrome-webview-checker.git"
+  },
+  "author": "Attila Olah <NoNameProvided@users.noreply.github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NoNameProvided/cordova-plugin-chrome-webview-checker/issues"
+  },
+  "homepage": "https://github.com/NoNameProvided/cordova-plugin-chrome-webview-checker#readme"
+}
