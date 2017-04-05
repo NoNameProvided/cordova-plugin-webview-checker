@@ -11,11 +11,19 @@ Currently there is 2 API call only:
 It returns a promise which will be resolved to `true` if the Android System Webview is installed and enabled or to `false` otherwise.
 
 Note: Technically all Android phone has Android System Webview but when it's disabled it will defaults to the one shipped with the phone.
-So you should determine a minimal reqired version and use `getChromeWebviewVersion` to check if the installed version is higher or not.
+So you should determine a minimal reqired version and use `plugins.chromeWebviewChecker.getChromeWebviewVersion` to check if the installed version is higher or not.
+
+```js
+plugins.chromeWebviewChecker.isChromeWebviewInstalled().then(console.log, console.error)
+```
 
 ### getChromeWebviewVersion
 
 It returns a promise which will be resolved to string representaion of the version number (eg: `57.0.2987.132`) or reject with a `Package is not found` error.
+
+```js
+plugins.chromeWebviewChecker.getChromeWebviewVersion().then(console.log, console.error)
+```
 
 ## TODO
 
