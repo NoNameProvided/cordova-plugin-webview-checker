@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-chrome-webview-checker",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Checks whether Android System Webview is installed and enabled or not on Cordova.",
   "keywords": [
     "ecosystem:cordova",
