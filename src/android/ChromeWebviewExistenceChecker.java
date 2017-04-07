@@ -57,7 +57,7 @@ public class ChromeWebviewExistenceChecker extends CordovaPlugin {
       callbackContext.success(installed.toString());
       return true;
     } catch (PackageManager.NameNotFoundException e) {
-      callbackContext.success(false.toString());
+      callbackContext.success("false");
       // callbackContext.error("Package is not found");
       return false;
     }
