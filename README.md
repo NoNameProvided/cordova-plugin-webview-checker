@@ -14,7 +14,9 @@ Note: Technically all Android phone has Android System Webview but when it's dis
 So you should determine a minimal reqired version and use `plugins.chromeWebviewChecker.getChromeWebviewVersion` to check if the installed version is higher or not.
 
 ```js
-plugins.chromeWebviewChecker.isChromeWebviewInstalled().then(console.log, console.error)
+plugins.chromeWebviewChecker.isChromeWebviewInstalled()
+  .then(function(enabled) { console.log(enabled); }))
+  .catch(function(error) { console.error(error); }));
 ```
 
 ### getChromeWebviewVersion
@@ -22,8 +24,15 @@ plugins.chromeWebviewChecker.isChromeWebviewInstalled().then(console.log, consol
 It returns a promise which will be resolved to string representaion of the version number (eg: `57.0.2987.132`) or reject with a `Package is not found` error.
 
 ```js
-plugins.chromeWebviewChecker.getChromeWebviewVersion().then(console.log, console.error)
+plugins.chromeWebviewChecker.getChromeWebviewVersion()
+  .then(function(enabled) { console.log(enabled); }))
+  .catch(function(error) { console.error(error); }));
 ```
+
+## Notes
+
+Do not use arrow functions in the callback as they will break the code if the support package is not installed.
+Also do not pass the console function as a parameter like `.then(console.log)`, this will cause an `Uncaught TypeError: Illegal invocation` error.
 
 ## TODO
 
