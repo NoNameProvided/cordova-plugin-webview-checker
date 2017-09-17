@@ -1,2 +1,26 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules
+
+# Editors
+.idea
+.vscode
+
 # Test folder for running app
 playground
+
+# MacOS related files
+*.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows related files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
