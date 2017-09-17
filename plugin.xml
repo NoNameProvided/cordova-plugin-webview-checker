@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-chrome-webview-checker" version="0.9.1">
-<name>Android Chrome (System) Webview Checker</name>
-<description>Checks whether Android System Webview is installed and enabled or not.</description>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-webview-checker" version="0.9.2">
+<name>Android Webview Checker</name>
+<description>Checks whether Android System Webview is enabled or not.</description>
 <license>MIT</license>
 <author>Attila Olah</author>
 <keywords>android,system,webview,checker</keywords>
-<js-module src="www/chrome-webview-checker.js" name="chromeWebviewChecker">
-  <clobbers target="plugins.chromeWebviewChecker" />
+<js-module src="www/webview-checker.js" name="webViewChecker">
+  <clobbers target="plugins.webViewChecker" />
 </js-module>
 <platform name="android">
   <config-file target="config.xml" parent="/*">
-      <feature name="ChromeWebviewChecker">
-          <param name="android-package" value="com.nonameprovided.cordova.ChromeWebviewChecker.ChromeWebviewExistenceChecker"/>
+      <feature name="WebViewChecker">
+          <param name="android-package" value="com.nonameprovided.cordova.WebViewChecker.WebViewChecker"/>
       </feature>
   </config-file>
-  <source-file src="src/android/ChromeWebviewExistenceChecker.java" target-dir="src/com/nonameprovided/cordova/plugin" />
+  <source-file src="src/android/WebViewChecker.java" target-dir="src/com/nonameprovided/cordova/plugin" />
 </platform>
 </plugin>
