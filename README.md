@@ -1,6 +1,12 @@
-# cordova-plugin-chrome-webview-checker
+# cordova-plugin-webview-checker
 
 Checks whether Android System WebView is enabled or not.
+
+## Installation
+
+```
+cordova plugin add cordova-plugin-webview-checker
+```
 
 ## Notes
 
