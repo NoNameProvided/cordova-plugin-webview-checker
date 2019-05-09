@@ -43,8 +43,8 @@ Technically all Android phone has Android System WebView installed but when it's
 
 ```js
 plugins.webViewChecker.isWebViewEnabled()
-  .then(function(enabled) { console.log(enabled); }))
-  .catch(function(error) { console.error(error); }));
+  .then(function(enabled) { console.log(enabled); })
+  .catch(function(error) { console.error(error); });
 ```
 
 ### getWebViewVersion()
@@ -53,8 +53,8 @@ It returns a promise which will be resolved to the string representation of the 
 
 ```js
 plugins.webViewChecker.getWebViewVersion()
-  .then(function(version) { console.log(version); }))
-  .catch(function(error) { console.error(error); }));
+  .then(function(version) { console.log(version); })
+  .catch(function(error) { console.error(error); });
 ```
 
 ### openGooglePlayPage()
@@ -63,6 +63,6 @@ A helper function to open the Google Play page of Android System Webview. Useful
 
 ```js
 plugins.webViewChecker.openGooglePlayPage()
-  .then(function() { console.log('Google Play page of Android System Webview has been opened.'); }))
-  .catch(function(error) { console.error(error); }));
+  .then(function() { console.log('Google Play page of Android System Webview has been opened.'); })
+  .catch(function(error) { console.error(error); });
 ```
