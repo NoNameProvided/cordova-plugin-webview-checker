@@ -1,6 +1,9 @@
 # Logs
 logs
 *.log
+*.tmp
+*.tmp.*
+log.txt
 npm-debug.log*
 
 # Dependency directories
@@ -9,6 +12,18 @@ node_modules
 # Editors
 .idea
 .vscode
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# IDE - VSCode
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
 
 # Test folder for running app
 playground
