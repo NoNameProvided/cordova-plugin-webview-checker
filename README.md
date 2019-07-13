@@ -14,7 +14,7 @@ cordova plugin add cordova-plugin-webview-checker
 
 ## Usage
 
-#### tl,dr;
+**tl,dr;**
 
 - use ES5 code only
 - put your code for this plugin directly 
@@ -25,7 +25,7 @@ cordova plugin add cordova-plugin-webview-checker
 
 This plugin is used to detect the version of the WebView before launching your app, it should not be used in your application code, but directly added to `index.html` via a script tag (inline or not) to render an error state if the required Webview version is not present.
 
-#### Usage of language features above ES5
+**Usage of language features above ES5**
 
 Do not use anything else than ES5 to write your handler logic for this plugin and do not bundle it into your main application. The reason for this is that the older versions of webview do not support most of the ES6+ features and can only interpret ES5 code.
 
@@ -67,8 +67,7 @@ plugins.webViewChecker.isAndroidWebViewEnabled()
 
 ### getAndroidWebViewPackageInfo()
 
-Returns a promise which will be resolved to an object containing partial package info or rejected with a  
-`Package is not found` error if the Android System Webview is not installed.
+Returns a promise which will be resolved to an object containing partial package info or rejected with a `Package is not found` error if the Android System Webview is not installed.
 
 ```js
 plugins.webViewChecker.getAndroidWebViewPackageInfo()
@@ -90,8 +89,7 @@ Example response:
 
 ### getCurrentWebViewPackageInfo()
 
-Returns a promise which will be resolved to an object containing partial package info or rejected with a  
-`Cannot determine current WebView engine.` error if an unexpected error happened.
+Returns a promise which will be resolved to an object containing partial package info or rejected with a `Cannot determine current WebView engine.` error if an unexpected error happened.
 
 ```js
 plugins.webViewChecker.getCurrentWebViewPackageInfo()
@@ -120,5 +118,9 @@ plugins.webViewChecker.openGooglePlayPage()
   .then(function() { console.log('Google Play page has been opened.'); })
   .catch(function(error) { console.error(error); });
 ```
+
+## License
+
+[MIT](./LICENSE)
 
 [npm-package-url]: https://www.npmjs.com/package/cordova-plugin-webview-checker
