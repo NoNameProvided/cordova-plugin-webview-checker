@@ -1,6 +1,6 @@
 # cordova-plugin-webview-checker
 
-[![NPM version](https://badgen.net/npm/v/cordova-plugin-webview-checker)][npm-package-url]
+[![NPM version](https://img.shields.io/npm/v/cordova-plugin-webview-checker.svg)][npm-package-url]
 
 Cordova plugin that checks which version of Android System Webview is installed.
 
