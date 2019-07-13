@@ -1,5 +1,7 @@
 # cordova-plugin-webview-checker
 
+[![NPM version](https://badgen.net/npm/v/cordova-plugin-webview-checker)][npm-package-url]
+
 Checks whether Android System WebView is enabled or not.
 
 ## Installation
@@ -66,3 +68,5 @@ plugins.webViewChecker.openGooglePlayPage()
   .then(function() { console.log('Google Play page of Android System Webview has been opened.'); })
   .catch(function(error) { console.error(error); });
 ```
+
+[npm-package-url]: https://www.npmjs.com/package/cordova-plugin-webview-checker
