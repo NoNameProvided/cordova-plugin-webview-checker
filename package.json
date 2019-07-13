@@ -17,8 +17,8 @@
     "cordova-android"
   ],
   "scripts": {
-    "testing:setup": "cordova create playground org.cpcwc.playground playground && cd ./playground && cordova platform add android --save",
-    "testing:start": "cd ./playground && cordova plugin add cordova-plugin-webview-checker --force --link --searchpath .. && cordova run android",
+    "testing:setup": "cordova create playground org.cpcwc.playground playground && cd ./playground && cordova platform add android --save && cordova plugin add cordova-plugin-webview-checker --force --link --searchpath ..",
+    "testing:start": "cd ./playground && cordova plugin remove cordova-plugin-webview-checker && cordova plugin add cordova-plugin-webview-checker --force --link --searchpath .. && cordova run android",
     "testing:reset": "rm -rf playground"
   }
 }
