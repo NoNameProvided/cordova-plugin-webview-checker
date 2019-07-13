@@ -51,39 +51,73 @@ Every Android release since Android 4.4 (KitKat) comes pre-installed with Androi
 
 ## API
 
-### isWebViewEnabled()
+### isAndroidWebViewEnabled()
 
 Returns a promise which will be resolved to `true` if the Android System Webview is enabled or `false` otherwise.
 
 ```js
-plugins.webViewChecker.isWebViewEnabled()
+plugins.webViewChecker.isAndroidWebViewEnabled()
   .then(function(enabled) { console.log(enabled); })
   .catch(function(error) { console.error(error); });
 ```
 
-> **Note:** Technically all Android phone has the Android System WebView installed but when it's disabled it will default to the version shipped with the phone. So you should determine a minimum required version and use `plugins.chromeWebviewChecker.getChromeWebviewVersion` to check if the installed version is higher or not.
+> **Note:** Technically all Android phone has the Android System WebView installed but when it's disabled it will default to the version shipped with the phone. So you should determine a minimum required version and use `plugins.webViewChecker.getCurrentWebViewPackageInfo()` function to check if the installed version is higher or not.
 
 --- 
 
-### getWebViewVersion()
+### getAndroidWebViewPackageInfo()
 
-Returns a promise which will be resolved to the string representation of the version number (eg: `57.0.2987.132`) or rejected with a `Package is not found` error if the Android System Webview is not installed
+Returns a promise which will be resolved to an object containing partial package info or rejected with a  
+`Package is not found` error if the Android System Webview is not installed.
 
 ```js
-plugins.webViewChecker.getWebViewVersion()
-  .then(function(versionString) { console.log(versionString); })
+plugins.webViewChecker.getAndroidWebViewPackageInfo()
+  .then(function(packageInfo) { console.log(packageInfo); })
   .catch(function(error) { console.error(error); });
+```
+
+Example response: 
+
+```js
+{
+  packageName: "com.google.android.webview"
+  versionName: "69.0.3497.100"
+  versionCode: 349710065
+}
 ```
 
 ---
 
-### openGooglePlayPage()
+### getCurrentWebViewPackageInfo()
 
-A helper function to open the Google Play page of Android System Webview. Useful for prompting the user to update/enable the Android System Webview.
+Returns a promise which will be resolved to an object containing partial package info or rejected with a  
+`Cannot determine current WebView engine.` error if an unexpected error happened.
+
+```js
+plugins.webViewChecker.getCurrentWebViewPackageInfo()
+  .then(function(packageInfo) { console.log(packageInfo); })
+  .catch(function(error) { console.error(error); });
+```
+
+Example response: 
+
+```js
+{
+  packageName: "com.android.chrome"
+  versionName: "69.0.3497.100"
+  versionCode: 349710065
+}
+```
+
+---
+
+### openGooglePlayPage(packageName?: string)
+
+A helper function to open the Google Play page of the currently active WebView engine or the specified package name.
 
 ```js
 plugins.webViewChecker.openGooglePlayPage()
-  .then(function() { console.log('Google Play page of Android System Webview has been opened.'); })
+  .then(function() { console.log('Google Play page has been opened.'); })
   .catch(function(error) { console.error(error); });
 ```
 
