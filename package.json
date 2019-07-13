@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-webview-checker",
-  "version": "0.9.2",
+  "version": "1.0.0",
   "author": "Attila Olah <NoNameProvided@users.noreply.github.com>",
   "description": "Checks whether Android System WebView is installed and enabled or not on Cordova.",
   "license": "MIT",
