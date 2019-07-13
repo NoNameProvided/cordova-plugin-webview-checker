@@ -21,6 +21,7 @@ cordova plugin add cordova-plugin-webview-checker
   - into the `index.html`
   - into a separate js file what is included before the application code in `index.html`  
 - avoid the list of known issues in the quirks section
+- you need to wait for the `deviceready` signal to start using the API
 
 This plugin is used to detect the version of the WebView before launching your app, it should not be used in your application code, but directly added to `index.html` via a script tag (inline or not) to render an error state if the required Webview version is not present.
 
