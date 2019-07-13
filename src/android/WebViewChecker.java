@@ -7,53 +7,116 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.pm.ApplicationInfo;
+import android.os.Build;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.webkit.WebView;
+
+import java.lang.reflect.Method;
 
 /**
-* This class echoes a string called from JavaScript.
-*/
+ * This class echoes a string called from JavaScript.
+ */
 public class WebViewChecker extends CordovaPlugin {
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
     if (action.equals("isAppEnabled")) {
-      String packagename = args.getString(0);
-      this.isAppEnabled(packagename, callbackContext);
+      String packageName = args.getString(0);
+      this.isAppEnabled(packageName, callbackContext);
+
       return true;
     }
 
-    if (action.equals("getAppVersion")) {
-      String packagename = args.getString(0);
-      this.getAppVersion(packagename, callbackContext);
+    if (action.equals("getAppPackageInfo")) {
+      String packageName = args.getString(0);
+      this.getAppPackageInfo(packageName, callbackContext);
+
       return true;
     }
 
     if (action.equals("openGooglePlayPage")) {
-      String packagename = args.getString(0);
-      this.openGooglePlayPage(packagename, callbackContext);
+      String packageName = args.getString(0);
+      this.openGooglePlayPage(packageName, callbackContext);
+
       return true;
     }
 
-    callbackContext.error("Command not found");
+    if (action.equals("getCurrentWebViewPackageInfo")) {
+      this.getCurrentWebViewPackageInfo(callbackContext);
+
+      return true;
+    }
+
+    callbackContext.error("Command not found. (" + action.toString() + ")");
     return false;
   }
 
-  public void getAppVersion(String packagename, CallbackContext callbackContext) {
+  /**
+   * Returns information about the currently selected WebView engine.
+   */
+  public void getCurrentWebViewPackageInfo(CallbackContext callbackContext) throws org.json.JSONException {
+    PackageInfo pInfo = null;
+    JSONObject responseObject = new JSONObject();
+
+    try {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        /* Starting with Android O (API 26) they added a new method specific for this */
+        pInfo = WebView.getCurrentWebViewPackage();
+      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        /**
+        * With Android Lollipop (API 21) they started to update the WebView
+        * as a separate APK with the PlayStore and they added the
+        * getLoadedPackageInfo() method to the WebViewFactory class and this
+        * should handle the Android 7.0 behaviour changes too.
+        */
+        Class webViewFactory = Class.forName("android.webkit.WebViewFactory");
+        Method method = webViewFactory.getMethod("getLoadedPackageInfo");
+        pInfo = (PackageInfo) method.invoke(null);            
+      } else {
+        /* Before Lollipop the WebView was bundled with the OS. */
+        this.getAppPackageInfo("com.google.android.webview", callbackContext);
+
+        /* The getAppPackageInfo function resolves the callbackContext 
+         * and returns the same response, so we need to return here. 
+         */
+        return;
+      }
+
+      responseObject.put("packageName", pInfo.packageName);
+      responseObject.put("versionName", pInfo.versionName);
+      responseObject.put("versionCode", pInfo.versionCode);
+
+      callbackContext.success(responseObject);  
+    } catch (Exception e) {
+        callbackContext.error("Cannot determine current WebView engine. (" + e.getMessage() + ")");
+        
+      return;
+    }
+  }
+
+  /**
+   * Returns partial package information about the specified package.
+   */
+  public void getAppPackageInfo(String packagename, CallbackContext callbackContext) throws org.json.JSONException {
+    PackageInfo pInfo = null;
+    JSONObject responseObject = new JSONObject();
     PackageManager packageManager = this.cordova.getActivity().getPackageManager();
 
     try {
-      PackageInfo info = packageManager.getPackageInfo(packagename, 0);
-      String version = info.versionName;
-      callbackContext.success(version);
+      pInfo = packageManager.getPackageInfo(packagename, 0);
     } catch (PackageManager.NameNotFoundException e) {
       callbackContext.error("Package not found");
     }
+
+    responseObject.put("packageName", pInfo.packageName);
+    responseObject.put("versionName", pInfo.versionName);
+    responseObject.put("versionCode", pInfo.versionCode);
+
+    callbackContext.success(responseObject);
   }
 
   public void isAppEnabled(String packagename, CallbackContext callbackContext) {
@@ -67,8 +130,7 @@ public class WebViewChecker extends CordovaPlugin {
     }
   }
 
-  private void openGooglePlayPage(String packagename, CallbackContext callbackContext)
-      throws android.content.ActivityNotFoundException {
+  private void openGooglePlayPage(String packagename, CallbackContext callbackContext) throws android.content.ActivityNotFoundException {
     Context context = this.cordova.getActivity().getApplicationContext();
     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packagename));
 
@@ -80,6 +142,5 @@ public class WebViewChecker extends CordovaPlugin {
     } catch (Exception e) {
       callbackContext.error("Cannot open Google Play. (" + e.getMessage() + ")");
     }
-
   }
 }
