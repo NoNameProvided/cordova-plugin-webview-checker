@@ -2,6 +2,12 @@
 
 _This changelog follows the [keep a changelog][1]_ format to maintain a human readable changelog.
 
+## 1.0.1 - 2019-10-01
+
+### Fixed
+
+- fix version mismatch between `config.xml` and `pacakge.json` (closes #6)
+
 ## 1.0.0 - 2019-07-13 [BREAKING CHANGE]
 
 ### Added
@@ -11,7 +17,7 @@ _This changelog follows the [keep a changelog][1]_ format to maintain a human re
 - add `getCurrentWebViewPackageInfo` function to allow to check what is the currently selected WebView engine
 - add `POSSIBLE_WEBVIEW_ENGINES` constant exposing all available WebView engine package names
 
-### Changed 
+### Changed
 
 - `openGooglePlayPage` function now accepts an optional parameter specifiying a package name
 - `README.md` intro is rewritten to better explain the functionality of the plugin
