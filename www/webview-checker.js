@@ -1,5 +1,5 @@
 /**
- * List of possible WebView engines package names.
+ * List of possible WebView engine package names.
  */
 var POSSIBLE_WEBVIEW_ENGINES = {
   AndroidSystemWebView: "com.google.android.webview",
